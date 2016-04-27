@@ -2,9 +2,12 @@
         ServerAdmin webmaster@localhost
 
         DocumentRoot /home/{{ BIKA_USER }}/bika.penelope
-        <Directory />
+        <Directory /home/{{ BIKA_USER }}/bika.penelope>
                 Options FollowSymLinks
-                AllowOverride None
+                AllowOverride AuthConfig FileInfo
+                Order allow,deny
+                Allow from all
+                Require all granted
         </Directory>
 
         ErrorLog ${APACHE_LOG_DIR}/error.log
