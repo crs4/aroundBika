@@ -2,3 +2,4 @@
   roles:
   - user
   - setup
+  - deploy

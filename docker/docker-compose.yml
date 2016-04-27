@@ -1,0 +1,24 @@
+version: '2'
+services:
+  aroundbika:
+    image: gmauro/aroundbika
+    hostname: aroundbika
+    container_name: aroundbika
+    links:
+        - bikaplone
+  bikaplone:
+    image: gmauro/bikaplone
+    hostname: bikaplone
+    container_name: bikaplone
+    ports:
+        - 8080:8080
+    volumes:
+        - bika_filestorage:/data/filestorage
+        - bika_blobstorage:/data/blobstorage
+
+volumes:
+   bika_filestorage:
+     driver: local
+   bika_blobstorage:
+     driver: local
+
