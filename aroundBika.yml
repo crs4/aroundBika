@@ -1,4 +1,5 @@
 - hosts: web
+  become_method: su
   roles:
   - user
   - setup

@@ -8,6 +8,7 @@
   template: src=virtualhost.j2 dest=/etc/apache2/site-available/bika.conf mode=0644
 
 - name: a2ensite {{ DOMAIN }}
+  become: yes
   command: a2ensite {{ DOMAIN }}
   args:
     creates: /etc/apache2/sites-enabled/{{ DOMAIN }}.conf
