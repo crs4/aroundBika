@@ -2,7 +2,7 @@
 FROM gmauro/debian-ansible
 MAINTAINER Gianmauro Cuccuru <gmauro@gmail.com>
 
-ARG DEBIAN_FRONTEND noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN git clone https://github.com/gmauro/aroundBika /tmp/aroundBika
 WORKDIR /tmp/aroundBika
