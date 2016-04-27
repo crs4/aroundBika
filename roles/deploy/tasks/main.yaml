@@ -1,6 +1,6 @@
 - name: install bika.penelope
   become: yes
-  become_user: {{ BIKA_USER }}
+  become_user: "{{ BIKA_USER }}"
   git: repo=https://github.com/ratzeni/bika.penelope.git dest=/home/{{ BIKA_USER }}
 
 - name: copy virtualhost config
