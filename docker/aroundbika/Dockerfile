@@ -8,7 +8,7 @@ RUN git clone https://github.com/gmauro/aroundBika /tmp/aroundBika
 WORKDIR /tmp/aroundBika
 RUN ansible-playbook aroundBika.yml
 
-EXPOSE 80
+EXPOSE 8081
 
 RUN apt-get update && apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
