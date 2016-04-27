@@ -6,6 +6,8 @@ services:
     container_name: aroundbika
     links:
         - bikaplone
+    ports:
+        - 8090:80
   bikaplone:
     image: gmauro/bikaplone
     hostname: bikaplone
