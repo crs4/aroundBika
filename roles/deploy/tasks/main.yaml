@@ -5,7 +5,7 @@
 
 - name: copy virtualhost config
   become: yes
-  template: src=virtualhost.j2 dest=/etc/apache2/site-available/bika.conf mode=0644
+  template: src=virtualhost.j2 dest=/etc/apache2/sites-available/bika.conf mode=0644
 
 - name: a2ensite {{ DOMAIN }}
   become: yes
