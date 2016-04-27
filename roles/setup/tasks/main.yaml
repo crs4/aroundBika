@@ -1,0 +1,7 @@
+- name: install packages needed by bika.penelope
+  become: yes
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - apache2
+    - git
+  when: ansible_os_family == "Debian"

@@ -1,0 +1,15 @@
+- name: install bika.penelope
+  become: yes
+  become_user: {{ BIKA_USER }}
+  git: repo=https://github.com/ratzeni/bika.penelope.git dest=/home/{{ BIKA_USER }}
+
+- name: copy virtualhost config
+  become: yes
+  template: src=virtualhost.j2 dest=/etc/apache2/site-available/bika.conf mode=0644
+
+- name: a2ensite {{ DOMAIN }}
+  command: a2ensite {{ DOMAIN }}
+  args:
+    creates: /etc/apache2/sites-enabled/{{ DOMAIN }}.conf
+  notify:
+    - restart apache2
