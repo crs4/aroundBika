@@ -1,7 +1,15 @@
-- name: install bika.penelope
+- name: install bika.client
   become: yes
   become_user: "{{ BIKA_USER }}"
-  git: repo=https://github.com/ratzeni/bika.penelope.git dest=/home/{{ BIKA_USER }}/bika.penelope
+  pip: name='git+https://github.com/ratzeni/bika.client.git' editable=false
+
+- name: install aroundBika bundle
+  become: yes
+  become_user: "{{ BIKA_USER }}"
+  git: repo={{ item.repo }} dest={{ item.dest }}
+  with_items:
+    - {{ repo: 'https://github.com/ratzeni/bika.penelope.git', dest: '/home/{{ BIKA_USER }}/bika.penelope' }}
+    - {{ repo: 'https://github.com/ratzeni/bika.webservice.git', dest: '/home/{{ BIKA_USER }}/bika.webservice' }}
 
 - name: copy virtualhost config
   become: yes
