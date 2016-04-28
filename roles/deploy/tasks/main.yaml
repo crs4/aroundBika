@@ -15,7 +15,7 @@
     - { repo: 'https://github.com/ratzeni/bika.webservice.git', dest: "/home/{{ BIKA_USER }}/bika.webservice" }
 
 - name: set penelope services mode
-  file: path=/home/{{ BIKA_USER }}/bika.penelope/{{ item }} mode=0755
+  file: path=/home/{{ BIKA_USER }}/bika.webservice/{{ item }} mode=0755
   with_items:
     - penelope_read_service.sh
     - penelope_write_service.sh
@@ -31,7 +31,7 @@
     - { regexp: "DUMMY_PID_FILE_WRITE", repl: "$HOME/var/run/bika_service.write.pid" }
     - { regexp: "DUMMY_LOG_FILE_READ", repl: "$HOME/var/log/bika_service.read.log" }
     - { regexp: "DUMMY_LOG_FILE_WRITE", repl: "$HOME/var/log/bika_service.write.log" }
-    - { regexp: "DUMMY_HOST", repl: "localhost" }
+    - { regexp: "DUMMY_HOST", repl: "bikaplone" }
     - { regexp: "DUMMY_PORT_READ", repl: "8088" }
     - { regexp: "DUMMY_PORT_WRITE", repl: "8086" }
     - { regexp: "DUMMY_SERVER_READ", repl: "paste" }
