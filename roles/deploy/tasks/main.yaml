@@ -1,7 +1,10 @@
-- name: install bika.client
+- name: install bika.client and dependency
   become: yes
   become_user: "{{ BIKA_USER }}"
-  pip: name='git+https://github.com/ratzeni/bika.client.git' extra_args='--user' editable=false
+  pip: name={{ item }} extra_args='--user' editable=false
+  with_items:
+    - Paste
+    - git+https://github.com/ratzeni/bika.client.git
 
 - name: install aroundBika bundle
   become: yes
@@ -10,6 +13,29 @@
   with_items:
     - { repo: 'https://github.com/ratzeni/bika.penelope.git', dest: "/home/{{ BIKA_USER }}/bika.penelope" }
     - { repo: 'https://github.com/ratzeni/bika.webservice.git', dest: "/home/{{ BIKA_USER }}/bika.webservice" }
+
+- name: set penelope services mode
+  file: path=/home/{{ BIKA_USER }}/bika.penelope/{{ item }} mode=0755
+  with_items:
+    - penelope_read_service.sh
+    - penelope_write_service.sh
+
+- name: rename init.cfg.sample
+  command: mv /home/{{ BIKA_USER }}/bika.webservice/init.cfg.sample /home/{{ BIKA_USER }}/bika.webservice/init.cfg
+
+- name: replace vars into bika.webservice config script
+  replace: dest="/home/{{ BIKA_USER }}/bika.webservice/init.cfg" regexp="{{ item.regexp }}" replace="{{ item.repl }}"
+  with_items:
+    - { regexp: "DUMMY_SERVICE_DIR", repl: "$HOME/bika.webservice" }
+    - { regexp: "DUMMY_PID_FILE_READ", repl: "$HOME/var/run/bika_service.read.pid" }
+    - { regexp: "DUMMY_PID_FILE_WRITE", repl: "$HOME/var/run/bika_service.write.pid" }
+    - { regexp: "DUMMY_LOG_FILE_READ", repl: "$HOME/var/log/bika_service.read.log" }
+    - { regexp: "DUMMY_LOG_FILE_WRITE", repl: "$HOME/var/log/bika_service.write.log" }
+    - { regexp: "DUMMY_HOST", repl: "localhost" }
+    - { regexp: "DUMMY_PORT_READ", repl: "8088" }
+    - { regexp: "DUMMY_PORT_WRITE", repl: "8086" }
+    - { regexp: "DUMMY_SERVER_READ", repl: "paste" }
+    - { regexp: "DUMMY_SERVER_WRITE", repl: "wsgiref" }
 
 - name: copy virtualhost config
   become: yes

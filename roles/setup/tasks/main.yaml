@@ -1,4 +1,4 @@
-- name: install packages needed by bika.penelope
+- name: install packages needed by bika.penelope and bika.webservice
   become: yes
   apt: name={{ item }} state=latest update_cache=yes
   with_items:
@@ -6,4 +6,5 @@
     - git
     - supervisor
     - vim
+    - python-paste
   when: ansible_os_family == "Debian"
