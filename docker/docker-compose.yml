@@ -8,6 +8,8 @@ services:
         - bikaplone
     ports:
         - 8081:8081
+        - 8086:8086
+        - 8088:8088
   bikaplone:
     image: gmauro/bikaplone
     hostname: bikaplone
@@ -17,10 +19,36 @@ services:
     volumes:
         - bika_filestorage:/data/filestorage
         - bika_blobstorage:/data/blobstorage
+  icommands:
+    image: gmauro/icommands
+    hostname: icommands
+    container_name: icommands
+    volumes:
+        - icommands_home:/home
+    links:
+        - irods:irodserver
+  irods:
+    image: gmauro/boxed-irods
+    hostname: irodserver
+    container_name: boxed-irods
+    ports:
+        - 1247:1247
+    volumes:
+        - boxed-irods_etc:/etc
+        - boxed-irods_home:/home
+        - boxed-irods_var:/var/lib
 
 volumes:
    bika_filestorage:
      driver: local
    bika_blobstorage:
+     driver: local
+   icommands_home:
+     driver: local
+   boxed-irods_etc:
+     driver: local
+   boxed-irods_home:
+     driver: local
+   boxed-irods_var:
      driver: local
 
