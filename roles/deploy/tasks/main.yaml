@@ -3,7 +3,7 @@
   become_user: "{{ BIKA_USER }}"
   pip: name={{ item }} extra_args='--user' editable=false
   with_items:
-    - python-paste
+    - paste
     - python-daemon
     - lockfile
     - bottle
