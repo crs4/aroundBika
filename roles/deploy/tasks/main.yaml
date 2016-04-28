@@ -1,7 +1,7 @@
 - name: install bika.client
   become: yes
   become_user: "{{ BIKA_USER }}"
-  pip: name='git+https://github.com/ratzeni/bika.client.git' editable=false
+  pip: name='git+https://github.com/ratzeni/bika.client.git' extra_args='--user' editable=false
 
 - name: install aroundBika bundle
   become: yes
