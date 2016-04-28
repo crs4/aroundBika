@@ -8,8 +8,8 @@
   become_user: "{{ BIKA_USER }}"
   git: repo={{ item.repo }} dest={{ item.dest }}
   with_items:
-    - {{ repo: 'https://github.com/ratzeni/bika.penelope.git', dest: '/home/{{ BIKA_USER }}/bika.penelope' }}
-    - {{ repo: 'https://github.com/ratzeni/bika.webservice.git', dest: '/home/{{ BIKA_USER }}/bika.webservice' }}
+    - "{{ repo: 'https://github.com/ratzeni/bika.penelope.git', dest: '/home/{{ BIKA_USER }}/bika.penelope' }}"
+    - "{{ repo: 'https://github.com/ratzeni/bika.webservice.git', dest: '/home/{{ BIKA_USER }}/bika.webservice' }}"
 
 - name: copy virtualhost config
   become: yes
