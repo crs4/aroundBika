@@ -23,6 +23,12 @@
 - name: rename init.cfg.sample
   command: mv /home/{{ BIKA_USER }}/bika.webservice/init.cfg.sample /home/{{ BIKA_USER }}/bika.webservice/init.cfg
 
+- name: create bika.webservice dirs
+  file: path={{ item }} state=directory mode=0755
+  with_items:
+    - /home/{{ BIKA_USER }}/var/run
+    - /home/{{ BIKA_USER }}/var/log
+
 - name: replace vars into bika.webservice config script
   replace: dest="/home/{{ BIKA_USER }}/bika.webservice/init.cfg" regexp="{{ item.regexp }}" replace="{{ item.repl }}"
   with_items:
