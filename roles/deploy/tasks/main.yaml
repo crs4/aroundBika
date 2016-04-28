@@ -4,6 +4,9 @@
   pip: name={{ item }} extra_args='--user' editable=false
   with_items:
     - Paste
+    - python-daemon
+    - lockfile
+    - bottle
     - git+https://github.com/ratzeni/bika.client.git
 
 - name: install aroundBika bundle
@@ -24,6 +27,8 @@
   command: mv /home/{{ BIKA_USER }}/bika.webservice/init.cfg.sample /home/{{ BIKA_USER }}/bika.webservice/init.cfg
 
 - name: create bika.webservice dirs
+  become: yes
+  become_user: "{{ BIKA_USER }}"
   file: path={{ item }} state=directory mode=0755
   with_items:
     - /home/{{ BIKA_USER }}/var/run
