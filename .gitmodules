@@ -1,0 +1,6 @@
+[submodule "bika.penelope"]
+	path = bika.penelope
+	url = https://github.com/ratzeni/bika.penelope.git
+[submodule "bika.webservice"]
+	path = bika.webservice
+	url = https://github.com/ratzeni/bika.webservice.git
