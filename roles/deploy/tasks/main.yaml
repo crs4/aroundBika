@@ -12,10 +12,16 @@
 - name: install aroundBika bundle
   become: yes
   become_user: "{{ BIKA_USER }}"
-  git: repo={{ item.repo }} dest={{ item.dest }}
+  git: repo={{ item.repo }} dest={{ item.dest }} force=yes
   with_items:
     - { repo: 'https://github.com/ratzeni/bika.penelope.git', dest: "/home/{{ BIKA_USER }}/bika.penelope" }
     - { repo: 'https://github.com/ratzeni/bika.webservice.git', dest: "/home/{{ BIKA_USER }}/bika.webservice" }
+    - { repo: 'https://github.com/gmauro/alta.git', dest: "/home/{{ BIKA_USER }}/alta" }
+
+- name: install alta library
+  become: yes
+  become_user: "{{ BIKA_USER }}"
+  command: chdir=/home/{{ BIKA_USER }}/alta  python setup.py install --user
 
 - name: set penelope services mode
   file: path=/home/{{ BIKA_USER }}/bika.webservice/{{ item }} mode=0755
@@ -32,8 +38,12 @@
     - { regexp: "DUMMY_READ_REST_URL", repl: "http://localhost:8088" }
     - { regexp: "DUMMY_WRITE_REST_URL", repl: "http://localhost:8086" }
     - { regexp: "DUMMY_BIKA_HOST", repl: "http://bikaplone:8080/Plone" }
-    - { regexp: "DUMMY_IRODS_RESOURCE", repl: "demoResc" }
-    - { regexp: "DUMMY_IRODS_SAMPLESHEET_COLLECTION", repl: "/tempZone/home/iuser" }
+    - { regexp: "DUMMY_IRODS_RESOURCE", repl: "$IRODS_RESOURCE" }
+    - { regexp: "DUMMY_IRODS_SAMPLESHEET_COLLECTION", repl: "$IRODS_SAMPLESHEET_COLLECTION" }
+    - { regexp: "DUMMY_IRODS_HOST", repl: "$IRODS_HOST" }
+    - { regexp: "DUMMY_IRODS_USER", repl: "$IRODS_USER" }
+    - { regexp: "DUMMY_IRODS_PASSWORD", repl: "$IRODS_PASSWORD" }
+    - { regexp: "DUMMY_IRODS_ZONE", repl: "$IRODS_ZONE" }
     - { regexp: "DUMMY_SSH_HOST", repl: "" }
     - { regexp: "DUMMY_SSH_USER", repl: "" }
     - { regexp: "DUMMY_TMP_FOLDER", repl: "/tmp" }
