@@ -1,7 +1,7 @@
 version: '2'
 services:
   aroundbika:
-    image: gmauro/aroundbika
+    image: quay.io/crs4/aroundbika
     hostname: aroundbika
     container_name: aroundbika
     links:
