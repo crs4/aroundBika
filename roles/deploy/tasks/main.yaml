@@ -35,21 +35,21 @@
 - name: replace vars into bika.penelope config script
   replace: dest="/home/{{ BIKA_USER }}/bika.penelope/app/init.module.js" regexp="{{ item.regexp }}" replace="{{ item.repl }}"
   with_items:
-    - { regexp: "DUMMY_READ_REST_URL", repl: "http://localhost:8088" }
-    - { regexp: "DUMMY_WRITE_REST_URL", repl: "http://localhost:8086" }
-    - { regexp: "DUMMY_BIKA_HOST", repl: "http://bikaplone:8080/Plone" }
-    - { regexp: "DUMMY_IRODS_RESOURCE", repl: "$IRODS_RESOURCE" }
-    - { regexp: "DUMMY_IRODS_SAMPLESHEET_COLLECTION", repl: "$IRODS_SAMPLESHEET_COLLECTION" }
-    - { regexp: "DUMMY_IRODS_HOST", repl: "$IRODS_HOST" }
-    - { regexp: "DUMMY_IRODS_USER", repl: "$IRODS_USER" }
-    - { regexp: "DUMMY_IRODS_PASSWORD", repl: "$IRODS_PASSWORD" }
-    - { regexp: "DUMMY_IRODS_ZONE", repl: "$IRODS_ZONE" }
-    - { regexp: "DUMMY_SSH_HOST", repl: "" }
-    - { regexp: "DUMMY_SSH_USER", repl: "" }
-    - { regexp: "DUMMY_TMP_FOLDER", repl: "/tmp" }
-    - { regexp: "DUMMY_RUN_FOLDERS", repl: "" }
-    - { regexp: "DUMMY_RUN_INFO_FILE", repl: "RunInfo.xml" }
-    - { regexp: "DUMMY_RUN_PARAMTERS_FILE", repl: "runParameters.xml" }
+    - { regexp: "DUMMY_READ_REST_URL", repl: "{{ READ_REST_URL }}" }
+    - { regexp: "DUMMY_WRITE_REST_URL", repl: "{{ WRITE_REST_URL }}" }
+    - { regexp: "DUMMY_BIKA_HOST", repl: " {{ BIKA_HOST }}" }
+    - { regexp: "DUMMY_IRODS_RESOURCE", repl: "{{ IRODS_RESOURCE }}" }
+    - { regexp: "DUMMY_IRODS_SAMPLESHEET_COLLECTION", repl: "{{ IRODS_SAMPLESHEET_COLLECTION }}" }
+    - { regexp: "DUMMY_IRODS_HOST", repl: "{{ IRODS_HOST }}" }
+    - { regexp: "DUMMY_IRODS_USER", repl: "{{ IRODS_USER }}" }
+    - { regexp: "DUMMY_IRODS_PASSWORD", repl: "{{ IRODS_PASSWORD }}" }
+    - { regexp: "DUMMY_IRODS_ZONE", repl: "{{ IRODS_ZONE }}" }
+    - { regexp: "DUMMY_SSH_HOST", repl: "{{ SSH_HOST }}" }
+    - { regexp: "DUMMY_SSH_USER", repl: "{{ SSH_USER }}" }
+    - { regexp: "DUMMY_TMP_FOLDER", repl: "{{ TMP_FOLDER }}" }
+    - { regexp: "DUMMY_RUN_FOLDERS", repl: "{{ RUN_FOLDERS }}" }
+    - { regexp: "DUMMY_RUN_INFO_FILE", repl: "{{ RUN_INFO_FILE }}" }
+    - { regexp: "DUMMY_RUN_PARAMETERS_FILE", repl: "{{ RUN_PARAMETERS_FILE }}" }
 
 
 - name: rename init.cfg.sample

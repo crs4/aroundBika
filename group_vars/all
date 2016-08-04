@@ -1,6 +1,9 @@
 BIKA_USER: bika
 BIKA_USER_PW: bika
 DOMAIN: bika
+READ_REST_URL: http://localhost:8088
+WRITE_REST_URL: http://localhost:8086
+BIKA_HOST: http://bikaplone:8080/Plone
 IRODS_HOST: irods
 IRODS_PORT:
 IRODS_USER: iuser
@@ -8,3 +11,9 @@ IRODS_PASSWORD: irods123
 IRODS_ZONE: tempZone
 IRODS_RESOURCE: demoResc
 IRODS_SAMPLESHEET_COLLECTION: /tempZone/home/iuser
+SSH_HOST:
+SSH_USER:
+TMP_FOLDER: /tmp
+RUN_FOLDERS:
+RUN_INFO_FILE: RunInfo.xml
+RUN_PARAMETERS_FILE: runParameters.xml
