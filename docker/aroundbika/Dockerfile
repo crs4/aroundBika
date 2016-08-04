@@ -4,7 +4,7 @@ MAINTAINER Gianmauro Cuccuru <gmauro@gmail.com>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN git clone https://github.com/gmauro/aroundBika /tmp/aroundBika
+RUN git clone https://github.com/crs4/aroundBika /tmp/aroundBika
 WORKDIR /tmp/aroundBika
 RUN ansible-playbook aroundBika.yml
 
