@@ -5,7 +5,8 @@ MAINTAINER Gianmauro Cuccuru <gmauro@gmail.com>
 ARG DEBIAN_FRONTEND=noninteractive
 
 WORKDIR $(mktemp -d)
-RUN git clone https://github.com/crs4/aroundBika
+# cache buster: date | md5sum | cut -f 1 -d ' '
+RUN git clone https://github.com/crs4/aroundBika # 343fb57c8016b5ad019e1aee24292249
 RUN ansible-playbook -i localhost, aroundBika/aroundBika.yml
 
 EXPOSE 8081
