@@ -1,4 +1,4 @@
-- hosts: web
+- hosts: localhost
   connection: local
   become_method: su
   roles:
