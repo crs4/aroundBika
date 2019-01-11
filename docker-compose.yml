@@ -1,0 +1,52 @@
+version: '3.2'
+services:
+  bika_penelope:
+    image: httpd:2.4 #quay.io/crs4/bika.penelope
+    hostname: bika_penelope
+    container_name: bika_penelope   
+    ports:
+        - "80:80"
+#        - "8081:8081"
+    volumes:
+        - type: bind
+          source: ./bika.penelope/
+          target: /usr/local/apache2/htdocs/
+    depends_on:
+        - "bika_webservice"
+    restart: always
+  bika_webservice:
+    image: quay.io/crs4/bika.webservice
+    hostname: bika_webservice
+    container_name: bika_webservice
+    env_file:
+        - bika.webservice.env
+    ports:
+        - "8086:8086"
+        - "8088:8088"
+    restart: always
+  rabbit:
+    image: rabbitmq:3-management
+    hostname: rabbit
+    container_name: rabbit
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+    networks:
+        - hutch
+    restart: always
+  flower:
+    image: gmauro/flower
+    hostname: flower
+    container_name: flower
+    ports:
+        - "5555:5555"
+    networks:
+        - hutch
+    depends_on:
+        - "rabbit"
+    restart: always
+    command: ["flower", "--port=5555", "--broker=amqp://guest:guest@rabbit:5672//", "--broker_api=http://guest:guest@rabbit:15672/api/"]
+
+networks:
+  hutch:
+
