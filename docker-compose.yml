@@ -1,12 +1,11 @@
 version: '3.2'
 services:
   bika_penelope:
-    image: httpd:2.4 #quay.io/crs4/bika.penelope
+    image: httpd:2.4
     hostname: bika_penelope
     container_name: bika_penelope   
     ports:
         - "80:80"
-#        - "8081:8081"
     volumes:
         - type: bind
           source: ./bika.penelope/
