@@ -1,2 +1,0 @@
-- name: create bika user
-  user: name={{ BIKA_USER }} password={{ BIKA_USER_PW }} update_password=always shell=/bin/bash home=/home/{{ BIKA_USER }}
