@@ -8,6 +8,9 @@ services:
         - "80:80"
     volumes:
         - type: bind
+          source: ./httpd.conf
+          target: /usr/local/apache2/conf/httpd.conf
+        - type: bind
           source: ./bika.penelope/
           target: /usr/local/apache2/htdocs/
     depends_on:
